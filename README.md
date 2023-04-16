@@ -18,3 +18,7 @@ Note : Ajouter 2 espaces à la fin d'une ligne permet d'effectuer un retour à l
 
 * [ ] Non-coché
 * [x] Coché
+
+```javascript
+const str = 'Hello World';
+```
