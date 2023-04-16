@@ -6,10 +6,11 @@ const router = express.Router();
 // Import du middleware isAuthenticated
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const Offer = require("../models/Offer.js");
+require("dotenv").config();
 cloudinary.config({
-  cloud_name: "dgaiigrsa",
-  api_key: "731961956121585",
-  api_secret: "JQPCzf7K9aK2dnzhS4JA6PnMqSs",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 // Fonction qui permet de transformer nos fichier qu'on reçois sous forme de Buffer en base64 afin de pouvoir les upload sur cloudinary
 const convertToBase64 = (file) => {
