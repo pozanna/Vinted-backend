@@ -23,13 +23,14 @@ router.post(
   fileUpload(),
   async (req, res) => {
     try {
+      // console.log(req.headers.authorization);
       const { title, description, price, condition, city, brand, size, color } =
         req.body;
 
       const userCreatingOffer = req.user;
 
-      //console.log(req.body);
-      //console.log("req.files : ", req.files);
+      // console.log(req.body);
+      // console.log("req.files : ", req.files);
 
       const result = await cloudinary.uploader.upload(
         convertToBase64(req.files.picture),
@@ -63,23 +64,23 @@ router.post(
             EMPLACEMENT: city,
           },
         ],
-
-        product_image: { secure_url: result.secure_url },
-        owner: {
-          account: {
-            username: userCreatingOffer.account.username,
-            avatar: {},
-          },
-          _id: userCreatingOffer._id,
-        },
+        owner: req.user._id,
+        // product_image: { secure_url: result.secure_url },
+        // owner: {
+        //   account: {
+        //     username: userCreatingOffer.account.username,
+        //     avatar: {},
+        //   },
+        //   _id: userCreatingOffer._id,
+        // },
       });
-
+      console.log(newOffer);
       await newOffer.save();
       res.status(201).json(newOffer);
 
       // J'ai accès à req.user. Clef que j'ai stockée dans req dans le middleware isAuthenticated
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error });
     }
   }
 );

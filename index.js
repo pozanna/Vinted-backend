@@ -7,8 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1/vinted");
-
+// mongoose.connect("mongodb://127.0.0.1/vinted");
+mongoose.connect(process.env.MONGODB_URI);
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
 
@@ -19,6 +19,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "This route does not exist" });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server started");
 });
