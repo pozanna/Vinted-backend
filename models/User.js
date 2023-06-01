@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const User = mongoose.model("User", {
   email: String,
+
   account: {
     username: String,
     avatar: Object,
   },
-  newsletter: Boolean,
+  newsLetter: Boolean,
   token: String,
   hash: String,
   salt: String,

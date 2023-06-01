@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const isAuthenticated = async (req, res, next) => {
   // Le token reçu est dans req.headers.authorization
-  console.log(req.headers.authorization);
+  console.log("my token: " + req.headers.autorization);
+  // console.log(req.headers.authorization);
   //   Je vais chercher mon token et j'enlève "Bearer " devant
   const token = req.headers.authorization.replace("Bearer ", "");
 

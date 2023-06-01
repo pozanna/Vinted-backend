@@ -9,15 +9,16 @@ const User = require("../models/User");
 router.post("/user/signup", async (req, res) => {
   try {
     // console.log(req.body);
-    const { username, email, password, newsletter } = req.body;
+    const { username, email, password, newsLetter } = req.body;
 
     if (
       !username ||
       !email ||
       !password ||
-      //   (newsletter !== true && newsletter !== false)
-      typeof newsletter !== "boolean"
+      //   (newsLetter !== true && newsLetter !== false)
+      typeof newsLetter !== "boolean"
     ) {
+      console.log("Missing params");
       return res.status(400).json({ message: "Missing parameters" });
     }
 
@@ -42,7 +43,7 @@ router.post("/user/signup", async (req, res) => {
       account: {
         username: username,
       },
-      newsletter: newsletter,
+      newsLetter: newsLetter,
       token: token,
       salt: salt,
       hash: hash,
