@@ -39,7 +39,7 @@ router.post(
         }
       );
 
-      //  console.log(result);
+      console.log(result);
       //console.log(result);
 
       const newOffer = new Offer({
@@ -64,23 +64,23 @@ router.post(
             EMPLACEMENT: city,
           },
         ],
-        owner: req.user._id,
-        // product_image: { secure_url: result.secure_url },
-        // owner: {
-        //   account: {
-        //     username: userCreatingOffer.account.username,
-        //     avatar: {},
-        //   },
-        //   _id: userCreatingOffer._id,
-        // },
+        product_image: { secure_url: result.secure_url },
+        owner: {
+          account: {
+            username: userCreatingOffer.account.username,
+            avatar: {},
+          },
+          _id: userCreatingOffer._id,
+        },
       });
+      await newOffer.save();
       console.log(newOffer);
       await newOffer.save();
       res.status(201).json(newOffer);
 
       // J'ai accès à req.user. Clef que j'ai stockée dans req dans le middleware isAuthenticated
     } catch (error) {
-      res.status(500).json({ message: error });
+      res.status(500).json({ message: error.message });
     }
   }
 );
@@ -119,7 +119,7 @@ router.get("/offers", async (req, res) => {
       sort.product_price = 1;
     } // "asc"
 
-    let limit = 5;
+    let limit = 50;
     let page = 1;
     if (req.query.page) {
       page = req.query.page;

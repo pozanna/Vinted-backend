@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const Offer = mongoose.model("Offer", {
-  _id: mongoose.Schema.Types.ObjectId,
   product_name: String,
   product_description: String,
   product_price: Number,
